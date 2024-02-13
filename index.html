@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="script.js" defer></script>
+    <title>Geographical Coordinates Triangulator</title>
+</head>
+<body>
+    <h1>Geographical Coordinates Triangulator</h1>
+    <ul>
+        <p>Insert the three decimal coordinates to be triangulated. Ex: <b>N12.345678 W87.654321</b>.</p>
+        <li>A = <input id="input-A" type="text"></li>
+        <li>B = <input id="input-B" type="text"></li>
+        <li>C = <input id="input-C" type="text"></li>
+    </ul>
+    <button onclick="getResults()">Submit</button>
+    <div id="results-block" style="display: none;">
+        <h2>Results</h2>
+        <ul>
+            <h3>Angles:</h3>
+            <li>∠A = <span id="angle-A">0</span>°;</li>
+            <li>∠B = <span id="angle-B">0</span>°;</li>
+            <li>∠C = <span id="angle-C">0</span>°.</li>
+        </ul>
+        <ul>
+            <h3>Distances:</h3>
+            <li>AB = <span id="distances-AB">0</span> m;</li>
+            <li>AC = <span id="distances-AC">0</span> m;</li>
+            <li>BC = <span id="distances-BC">0</span> m.</li>
+        </ul>
+        <button onclick="clearResults()">Clear</button>
+    </div>
+</body>
+</html>
