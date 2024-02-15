@@ -38,21 +38,8 @@ function getCoordinate(input) {
 };
 
 function coordinatesDistance(X, Y) {
-    const R = 6471 * 10**3;
-
-    const varLat = Math.abs(X[0] - Y[0]);
-    const varLon = Math.abs(X[1] - Y[1]);
-
-    const wX = varLon * R * Math.cos(X[0]);
-    const wY = varLon * R * Math.cos(Y[0]);
-    const h = varLat * R;
-
-    return trapeziumDiagonal(wX, wY, h);
-};
-
-function trapeziumDiagonal(w1, w2, h) {    
-    return Math.sqrt((Math.max(w1, w2) - Math.abs(w1 - w2) / 2)**2 + h**2);
-};
+    return 2 * 6371 * 10**3 * Math.asin(Math.sqrt(Math.sin((X[0] - Y[0]) / 2)**2 + Math.cos(X[0]) * Math.cos(Y[0]) * Math.sin((X[1] - Y[1]) / 2)**2));
+}
 
 function triangleAngle(a, b, c) {
     return Math.acos((b**2 + c**2 - a**2) / (2 * b * c)) * 180 / Math.PI;
