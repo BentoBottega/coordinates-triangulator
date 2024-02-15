@@ -10,7 +10,6 @@ const getResults = () => {
     const alpha = triangleAngle(BC, AC, AB);
     const beta = triangleAngle(AC, AB, BC);
     const gamma = triangleAngle(AB, BC, AC);
-
     
     if (alpha + beta + gamma > 179) {
         document.getElementById("results-block").style.display = "block";
@@ -24,7 +23,7 @@ const getResults = () => {
         document.getElementById("distances-BC").innerHTML = BC;
     } else {
         document.getElementById("results-block").style.display = "none";
-        alert("The inserted coordinates are not valid. Insert the geographic coordinates in decimal form.")
+        alert("The inserted coordinates are not valid. Insert the geographical coordinates in decimal form.");
     }
 };
 
@@ -34,15 +33,15 @@ const clearResults = () => {
 
 function getCoordinate(input) {
     return input.value.split(' ').map(str => {
-        return str[0] === 'N' || str[0] === 'E' ? Number(str.slice(1)) : 0 - Number(str.slice(1));
+        return str[0] === 'N' || str[0] === 'E' ? Number(str.slice(1)) * Math.PI / 180 : 0 - Number(str.slice(1)) * Math.PI / 180;
     });
 };
 
 function coordinatesDistance(X, Y) {
-    const R = 6471 * Math.pow(10, 3);
+    const R = 6471 * 10**3;
 
-    const varLat = Math.abs(X[0] - Y[0]) * Math.PI / 180;
-    const varLon = Math.abs(X[1] - Y[1]) * Math.PI / 180;
+    const varLat = Math.abs(X[0] - Y[0]);
+    const varLon = Math.abs(X[1] - Y[1]);
 
     const wX = varLon * R * Math.cos(X[0]);
     const wY = varLon * R * Math.cos(Y[0]);
@@ -52,9 +51,9 @@ function coordinatesDistance(X, Y) {
 };
 
 function trapeziumDiagonal(w1, w2, h) {    
-    return Math.sqrt(Math.pow((Math.max(w1, w2) - Math.abs(w1 - w2) / 2), 2) + Math.pow(h, 2));
+    return Math.sqrt((Math.max(w1, w2) - Math.abs(w1 - w2) / 2)**2 + h**2);
 };
 
 function triangleAngle(a, b, c) {
-    return Math.acos((Math.pow(b, 2) + Math.pow(c, 2) - Math.pow(a, 2)) / (2 * b * c)) * 180 / Math.PI;
+    return Math.acos((b**2 + c**2 - a**2) / (2 * b * c)) * 180 / Math.PI;
 };
